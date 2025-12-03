@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.3.2"
+}
+
+group = "co.edu.udea"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '4.3.4'
+}
+
+dependencies {
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+
+    testImplementation "org.slf4j:slf4j-simple:2.0.9"
+}
+
+test {
+    useJUnit()
+
+    systemProperty "cucumber.filter.tags",
+            System.getProperty("cucumber.filter.tags", "")
+}
